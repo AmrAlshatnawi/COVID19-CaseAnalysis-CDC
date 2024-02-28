@@ -49,9 +49,9 @@ st.markdown("""Here, you'll find a comprehensive analysis structured into variou
 - **Introduction:** Get to know the background and objectives of our analysis.
 - **Research Questions:** Explore the key questions guiding our investigation.
 - **Data Source:** Learn about the CDC's COVID-19 Case Surveillance Public Use Data and how it's utilized in our study.
+- **Data Exploration and Munging:** This section outlines our initial steps in preparing and understanding the dataset. We start by examining the structure, quality, and distribution of the COVID-19 Case Surveillance Public Use Data.
 - **Analysis:** Dive into our findings with interactive visualizations and code snippets that bring the data to life.
-- **Findings:** Discover the significant patterns and insights we've uncovered through our analysis.
-- **Conclusion:** Reflect on the implications of our findings and the potential paths forward.""")
+- **Findings & Conclusion:** Discover the significant patterns and insights we've uncovered through our analysisand reflect on the implications of our findings and the potential paths forward.""")
 
 st.info("""**Acknowledgement**  
 This project was completed by students in the Intermediate Applied Data Analysis class within the Biomedical Informatics Program at the University of Chicago. Our work represents a collaborative educational endeavor, where we applied our learning to real-world data to contribute to the broader understanding of the COVID-19 pandemic.""")
