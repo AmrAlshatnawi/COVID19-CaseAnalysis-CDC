@@ -2,3 +2,15 @@ streamlit
 pandas
 numpy
 matplotlib
+seaborn
+plotly
+nbformat
+altair
+vega_datasets
+us
+cartopy
+statsmodels
+skimpy
+scikit-learn
+imbalanced-learn
+mplcursors
