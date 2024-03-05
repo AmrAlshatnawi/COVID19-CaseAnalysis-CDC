@@ -36,11 +36,11 @@ data = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'U
 
 st.subheader("""Is there a significant difference in COVID-19 case counts between different age groups?""")
 
-st.markdown("""To address the question of whether there is a significant difference in COVID-19 case counts between different age groups,
-             we examined the distribution of cases across each age category. Prior to conducting our analysis,
-             we hypothesized that the distribution would be uniform across the various age groups.
-             To enhance our understanding and facilitate a thorough analysis, 
-             we began by calculating the case counts for each age group.""")
+st.markdown("""To address the question of whether there is a significant difference in COVID-19 case counts between different
+               age groups, relative to the population size of those groups, we examined the distribution of cases across
+               each age category. Initially, we hypothesized that the distribution of cases would be proportional to the
+               population sizes of the various age groups. To lay the groundwork for our analysis,
+               we started by calculating the case counts for each age group.""")
 
 case_counts_by_age_group = data['age_group'].value_counts().sort_index()
 df_age_case = case_counts_by_age_group.reset_index()
@@ -87,21 +87,33 @@ st.markdown("""Observing the bar graph above reveals that the distribution of ca
 
 st.markdown("""To determine if these observed differences are statistically significant,
                 we utilized the Chi-square goodness-of-fit test. This test allowed us to compare the actual
-                distribution of cases across age groups against our initial prediction, which was based on the
-                expectation of a uniform distribution of COVID-19 cases across all age groups. 
+                distribution of cases across age groups against the expected distribution based on the population
+                sizes of each age group.
             """)
 
 st.subheader("chi square goodness of fit test results")
+#########################################################################
+# Population sizes for each age group
+populations = {'0-17 years': 74000000, '18-49 years': 132000000, '50-64 years': 64000000, '65+ years': 53000000}
 
+# Observed COVID-19 cases
+observed_cases = {'0-17 years': 171498, '18-49 years': 518457, '50-64 years': 188827, '65+ years': 145737}
 
+total_population = sum(populations.values())
+total_cases = sum(observed_cases.values())
 
-# Assuming an even distribution, each group's expected count is the total count divided by the number of groups
-total_cases = data['age_group'].count()
-expected_count_per_group = total_cases / len(case_counts_by_age_group)
-expected_counts = [expected_count_per_group] * len(case_counts_by_age_group)
+expected_cases = {}
+for group in populations:
+    proportion_of_population = populations[group] / total_population
+    expected_cases[group] = proportion_of_population * total_cases
 
-# Perform the test
-chi2_stat, p_value = chisquare(f_obs=case_counts_by_age_group, f_exp=expected_counts)
+# Convert observed and expected cases to lists
+observed = list(observed_cases.values())
+expected = list(expected_cases.values())
+
+# Perform the Chi-square goodness-of-fit test
+chi2_stat, p_value = chisquare(observed, f_exp=expected)
+
 
 # create dataframe to show test results 
 results = {
@@ -115,38 +127,53 @@ results_df['P-Value'] = results_df['P-Value'].apply(lambda x: f"{x:.4f}")
 
 st.dataframe(results_df)
 
-st.markdown("""Given that the p-value is less than 0.05, we reject the null hypothesis.
-               This low p-value suggests that the distribution of COVID-19 cases is not uniform across age groups,
-               and the observed difference in distribution is statistically significant. This difference could be due
-               to various factors such as differences in social behaviors, employment types, or exposure risks associated with different age groups. 
+st.markdown("""With the p-value being less than 0.05, we reject the null hypothesis.
+               This low p-value indicates that the actual distribution of COVID-19 cases across age groups does not align
+               with the distribution expected from the population sizes of these groups, marking the observed differences
+               in distribution as statistically significant. Such variations could stem from numerous factors,
+               including but not limited to, differences in social behaviors, types of employment, or varying levels
+               of exposure risk among the age groups.
 """)
-st.error("H0: The distribution of COVID-19 cases is uniform across age groups, indicating that age does not influence the likelihood of contracting COVID-19.")
-st.success("H1: The distribution of COVID-19 cases is not uniform across age groups, suggesting that certain age groups are more likely to contract COVID-19 than others.")
+st.error("H0: The distribution of COVID-19 cases across age groups is proportional to the population distribution of those age groups, indicating that age, relative to its population size, does not influence the likelihood of contracting COVID-19.")
+st.success("H1: The distribution of COVID-19 cases across age groups is not proportional to the population distribution of those age groups, suggesting that, relative to their population size, certain age groups are more likely to contract COVID-19 than others.")
 
 with st.expander("👆 Expand to view code"):
     st.code("""
 from scipy.stats import chisquare
 
-# Assuming an even distribution, each group's expected count is the total count divided by the number of groups
-total_cases = data['age_group'].count()
-expected_count_per_group = total_cases / len(case_counts_by_age_group)
-expected_counts = [expected_count_per_group] * len(case_counts_by_age_group)
+# Population sizes for each age group
+populations = {'0-17 years': 74000000, '18-49 years': 132000000, '50-64 years': 64000000, '65+ years': 53000000}
 
-# Perform the test
-chi2_stat, p_value = chisquare(f_obs=case_counts_by_age_group, f_exp=expected_counts)
+# Observed COVID-19 cases
+observed_cases = {'0-17 years': 171498, '18-49 years': 518457, '50-64 years': 188827, '65+ years': 145737}
+
+total_population = sum(populations.values())
+total_cases = sum(observed_cases.values())
+
+expected_cases = {}
+for group in populations:
+    proportion_of_population = populations[group] / total_population
+    expected_cases[group] = proportion_of_population * total_cases
+
+# Convert observed and expected cases to lists in the same order
+observed = list(observed_cases.values())
+expected = list(expected_cases.values())
+
+# Perform the Chi-square goodness-of-fit test
+chi2_stat, p_value = chisquare(observed, f_exp=expected)
+
 
 # create dataframe to show test results 
 results = {
-    'P-Value': {p_value},
-    'Chi-square_Statistic': {chi2_stat}
+    'P-Value': [p_value],
+    'Chi-square_Statistic': [chi2_stat]
 }
 results_df = pd.DataFrame(results)
 
 # Format the p-value 
 results_df['P-Value'] = results_df['P-Value'].apply(lambda x: f"{x:.4f}")
-
+            
 results_df.head()
-
 """)
     
 st.divider()
