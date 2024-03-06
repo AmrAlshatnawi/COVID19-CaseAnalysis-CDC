@@ -71,19 +71,5 @@ image_path = "./covid.png"
 image_base64 = get_image_base64(image_path)
 image_html = f'<img src="data:image/png;base64,{image_base64}" class="custom-img">'
 
-# Custom CSS to position the image
-css = """
-<style>
-.custom-img {
-    position: fixed;
-    bottom: 20px;
-    right: 130px;
-    width: 550px;  # Adjust the size as needed
-}
-</style>
-"""
-
-# Inject custom CSS and the base64-encoded image
-st.markdown(css, unsafe_allow_html=True)
-st.markdown(image_html, unsafe_allow_html=True)
+st.image("./covid.png")
 

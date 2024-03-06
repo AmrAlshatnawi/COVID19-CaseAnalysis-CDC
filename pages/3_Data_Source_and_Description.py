@@ -69,19 +69,4 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Custom CSS to inject via st.markdown
-image_url = "https://upload.wikimedia.org/wikipedia/commons/8/83/United_States_Centers_for_Disease_Control_and_Prevention_logo.svg"
-css = """
-<style>
-.custom-img {
-    position: fixed;
-    bottom: 80px;
-    right: 130px;
-    width: 220px;  # You can adjust the size
-}
-</style>
-"""
-
-# Inject custom CSS with the image at the bottom right corner
-st.markdown(css, unsafe_allow_html=True)
-st.markdown(f'<img src="{image_url}" class="custom-img">', unsafe_allow_html=True)
+st.image("./cdc.png")
