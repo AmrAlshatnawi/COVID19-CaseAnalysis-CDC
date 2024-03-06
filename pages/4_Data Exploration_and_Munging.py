@@ -9,10 +9,15 @@ st.set_page_config(
 )
 st.markdown("""<style>body {zoom: 1.4;  /* Adjust this value as needed */}</style>""", unsafe_allow_html=True)
 
-st.sidebar.markdown("""✍️**Authors:**                 
-    Amr Alshatnawi       
-    Hailey Pangburn                 
-    Richard McMasters""")
+st.sidebar.markdown("""<div style="font-size: 17px;">✍️ <strong>Authors:</strong></div> 
+\n&nbsp;                                  
+<a href="https://www.linkedin.com/in/amralshatnawi/" style="display: inline-block; padding: 5px 7px; background-color: #871212; color: white; text-align: center; text-decoration: none; font-size: 15px; border-radius: 4px;">&nbsp;&nbsp;Amr Alshatnawi&nbsp;&nbsp;</a><br>             
+
+<a href="https://www.linkedin.com/in/hailey-pangburn" style="display: inline-block; padding: 5px 7px; background-color: #871212; color: white; text-align: center; text-decoration: none; font-size: 15px; border-radius: 4px;">&nbsp;&nbsp;Hailey Pangburn&nbsp;&nbsp;</a><br>             
+                    
+<a href="mailto:mcmasters@uchicago.edu" style="display: inline-block; padding: 5px 7px; background-color: #871212; color: white; text-align: center; text-decoration: none; font-size: 15px; border-radius: 4px;">Richard McMasters</a><br>
+""", unsafe_allow_html=True)
+
 st.sidebar.write("---")
 st.sidebar.markdown("""📅 March 9th, 2024""")
 st.sidebar.image("Ulogo.png")
@@ -274,6 +279,9 @@ fig = px.bar(race_counts, x='Race', y='Count',
              )
 fig.update_layout(width=900, height=700)
 st.plotly_chart(fig)
+
+st.markdown("""The plot displayed above illustrates the distribution of COVID-19 cases by race,
+indicating that the White population has a significantly higher number of cases relative to other racial groups.""")
 
 with st.expander("👆 Expand to view code"):
     st.code("""
