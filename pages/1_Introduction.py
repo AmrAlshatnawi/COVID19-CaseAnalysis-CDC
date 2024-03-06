@@ -1,4 +1,5 @@
 import streamlit as st
+import base64
 
 st.set_page_config(
     page_title="Covid Data Analysis - Introduction",
@@ -52,8 +53,6 @@ groups were more susceptible to infection and also explore whether specific vari
 #st.image("./covid.png")
 
 
-
-import base64
 
 def get_image_base64(path):
     with open(path, "rb") as image_file:
