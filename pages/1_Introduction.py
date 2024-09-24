@@ -6,7 +6,7 @@ st.set_page_config(
     page_icon="📊",
     #layout="wide"   
 )
-st.markdown("""<style>body {zoom: 1.4;  /* Adjust this value as needed */}</style>""", unsafe_allow_html=True)
+#st.markdown("""<style>body {zoom: 1.4;  /* Adjust this value as needed */}</style>""", unsafe_allow_html=True)
 
 st.sidebar.markdown("""<div style="font-size: 17px;">✍️ <strong>Authors:</strong></div> 
 \n&nbsp;                                  
