@@ -87,7 +87,8 @@ st.markdown("Data preview: ")
 st.write(data.head())
 with st.expander("👆 Expand to view code"):
     st.code("""
-data = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
+csv_url = "https://www.dropbox.com/scl/fi/3ssnswv3158des6o0102v/systematic_sampled_covid_data_1M.csv?rlkey=kmf3ym19wdl3bq006fii5mcqa&st=8h53tkov&dl=1"
+data = pd.read_csv(csv_url, na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
 st.write(f"The sampled dataset contains {data.shape[0]} rows and {data.shape[1]} columns.")
 print("Data preview: ")
 data.head()

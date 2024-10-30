@@ -38,6 +38,7 @@ st.title("Analysis")
 st.divider()
 
 #data = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
+
 # data
 csv_url = "https://www.dropbox.com/scl/fi/3ssnswv3158des6o0102v/systematic_sampled_covid_data_1M.csv?rlkey=kmf3ym19wdl3bq006fii5mcqa&st=8h53tkov&dl=1"
 data = pd.read_csv(csv_url, na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
@@ -59,7 +60,9 @@ st.dataframe(df_age_case.head())
 
 with st.expander("👆 Expand to view code"):
     st.code("""
-data = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
+# data
+csv_url = "https://www.dropbox.com/scl/fi/3ssnswv3158des6o0102v/systematic_sampled_covid_data_1M.csv?rlkey=kmf3ym19wdl3bq006fii5mcqa&st=8h53tkov&dl=1"
+data = pd.read_csv(csv_url, na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
 case_counts_by_age_group = data['age_group'].value_counts().sort_index()
 df_age_case = case_counts_by_age_group.reset_index()
 
@@ -189,8 +192,8 @@ st.divider()
 
 st.header("Do gender, age group, and case year significantly associate with COVID-19 mortality outcomes?")
 
-
-data_LR = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN','Other'])
+csv_url = "https://www.dropbox.com/scl/fi/3ssnswv3158des6o0102v/systematic_sampled_covid_data_1M.csv?rlkey=kmf3ym19wdl3bq006fii5mcqa&st=8h53tkov&dl=1"
+data_LR = pd.read_csv(csv_url, na_values=['Missing', 'Unknown', 'NA', 'NaN','Other'])
 
 # List of columns to drop
 columns_to_drop = ['res_county', 'res_state', 'current_status', 'state_fips_code', 'county_fips_code',
@@ -243,7 +246,8 @@ st.dataframe(data_LR.drop(['case_month'], axis=1).head())
 
 with st.expander("👆 Expand to view code"):
     st.code("""
-data_LR = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN','Other'])
+csv_url = "https://www.dropbox.com/scl/fi/3ssnswv3158des6o0102v/systematic_sampled_covid_data_1M.csv?rlkey=kmf3ym19wdl3bq006fii5mcqa&st=8h53tkov&dl=1"
+data_LR = pd.read_csv(csv_url, na_values=['Missing', 'Unknown', 'NA', 'NaN','Other'])
 
 # List of columns to drop
 columns_to_drop = ['res_county', 'res_state', 'current_status', 'state_fips_code', 'county_fips_code',
