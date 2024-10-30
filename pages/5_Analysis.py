@@ -37,7 +37,9 @@ st.sidebar.image("Ulogo.png")
 st.title("Analysis")
 st.divider()
 
-data = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
+#data = pd.read_csv("systematic_sampled_covid_data.csv", na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
+csv_url = "https://www.dropbox.com/scl/fi/3ssnswv3158des6o0102v/systematic_sampled_covid_data_1M.csv?rlkey=kmf3ym19wdl3bq006fii5mcqa&st=8h53tkov&dl=1"
+data = pd.read_csv(csv_url, na_values=['Missing', 'Unknown', 'NA', 'NaN', '', ' '])
 
 st.header("""Is there a significant difference in COVID-19 case counts between different age groups?""")
 
